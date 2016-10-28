@@ -1,6 +1,6 @@
 import React from 'react';
 
-let Guide = React.createClass({ 
+export let Guide = React.createClass({ 
   render() {
     return(
       <div>
@@ -12,5 +12,3 @@ let Guide = React.createClass({
     );
   }
 });
-
-export default Guide;  

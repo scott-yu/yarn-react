@@ -1,6 +1,9 @@
 var webpack = require('webpack');
 
 module.exports = {
+  resolve: {
+    extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx']
+  },
   entry: [
       "webpack-dev-server/client?http://localhost:9000",
       'webpack/hot/only-dev-server',
@@ -14,7 +17,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         loaders: ["react-hot-loader/webpack",'babel-loader?presets[]=react,presets[]=es2015'],
         exclude: /node_modules/
       },
