@@ -13,6 +13,7 @@ export let Start = connect(select)(React.createClass({
     },
     render() {
         const productList = this.props.search.data.Items || [];
+        
         return(
             <div className="c-home">
                 <ul>
