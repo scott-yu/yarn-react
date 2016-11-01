@@ -1,27 +1,13 @@
 import React from 'react';
-import {Header} from './header';
-import {acountsApi} from "../api";
-import { connect } from "react-redux";
-import {Browse} from './start';
+import {HubHeader} from './hub-header';
 
-const select = state => ({ me: state.accounts.me });
-
-export let HubLayout = connect(select)(React.createClass({
-    componentDidMount() {
-        const {dispatch} = this.props;
-        dispatch(acountsApi.actions.me());
-    },
-    isAppReadyToRun() {
-        return this.props.me.data.ParentEntityId;
-    },
+export let HubLayout = React.createClass({
     render() {
-        if (!this.isAppReadyToRun()) return null;
-
         return (
             <div>
-                <Header />
+                <HubHeader />
                 { this.props.children }
             </div>
         );
     }
-}));
+});
