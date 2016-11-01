@@ -35,8 +35,7 @@ export const authenicate = () => {
                         resolve();
                         return;
                     }
-
-                    this.requestToken();
+                    requestToken();
                     reject();
                 });
         } else {
