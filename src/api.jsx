@@ -12,6 +12,14 @@ export const catalogApi = reduxApi({
                 Accept: 'application/json'
             })
         }
+    },
+    getClassificationTree: {
+        url: `${endpoints.catalogs}/v1/companies((:ParentEntityId))/catalog/classificationtrees`,
+        options: {
+            headers: getAjaxHeader({
+                Accept: 'application/json'
+            })
+        }
     }
 }).use('fetch', adapterFetch(fetch));
 

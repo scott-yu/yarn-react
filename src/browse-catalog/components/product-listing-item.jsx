@@ -8,6 +8,8 @@ export let ProductListingItem = React.createClass({
     },
     render() {
         const {Name, Slug} = this.props.data;
-        return <li>{Slug} {Name}</li>;
+        return (
+            <li>{Name}</li>
+        );
     }
 });
