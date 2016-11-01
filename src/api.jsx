@@ -1,15 +1,25 @@
 import 'isomorphic-fetch';
 import reduxApi from "redux-api";
 import adapterFetch from "redux-api/lib/adapters/fetch";
-import {TokenManager} from './utils/token-manager';
+import {getAjaxHeader} from './utils/auth-helpers';
+import {endpoints} from './consts/endpoints';
 
-const tokenManager = new TokenManager();
-
-export default reduxApi({
+export const catalogApi = reduxApi({
     search: {
-        url: `https://catalogsint.iqmetrix.net/v1/companies(12435)/catalog/search`,
+        url: `${endpoints.catalogs}/v1/companies((:ParentEntityId))/catalog/search`,
         options: {
-            headers: tokenManager.getAjaxHeader({
+            headers: getAjaxHeader({
+                Accept: 'application/json'
+            })
+        }
+    }
+}).use('fetch', adapterFetch(fetch));
+
+export const acountsApi = reduxApi({
+    me: {
+        url: `${endpoints.accounts}/v1/me`,
+        options: {
+            headers: getAjaxHeader({
                 Accept: 'application/json'
             })
         }

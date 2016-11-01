@@ -1,15 +1,17 @@
 import React from 'react';
-import api from "../api";
-import { Provider, connect } from "react-redux";
+import {catalogApi, acountsApi} from "../api";
+import { connect } from "react-redux";
 
 function select(state) {
-  return { search: state.search };
+  return { search: state.catalog.search, me: state.accounts.me };
 }
 
-export let Start = connect(select)(React.createClass({ 
+export let Browse = connect(select)(React.createClass({ 
     componentDidMount() {
         const {dispatch} = this.props;
-        dispatch(api.actions.search());
+        const {ParentEntityId} = this.props.me.data;
+        
+        dispatch(catalogApi.actions.search({ ParentEntityId }));
     },
     render() {
         const productList = this.props.search.data.Items || [];

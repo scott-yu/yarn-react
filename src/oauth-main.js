@@ -1,6 +1,5 @@
-import { TokenManager } from './utils/token-manager';
+import { processTokenAndRedirect } from './utils/auth-helpers';
 
 (function() {
-    const tokenManager = new TokenManager();
-    tokenManager.processTokenAndRedirect();
+    processTokenAndRedirect();
 })();
