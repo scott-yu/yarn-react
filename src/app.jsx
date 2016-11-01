@@ -12,7 +12,7 @@ export class App extends Component {
             <Router history={hashHistory}>
                 <Route path="/" component={HubContainer}>
                     <IndexRedirect to="browse"/>
-                    <Route path="browse" component={BrowseContainer}/>
+                    <Route path="browse(/industry/:industryId(/classification/:classificationId))" component={BrowseContainer}/>
                 </Route>
             </Router>  
         );

@@ -6,11 +6,22 @@ import {endpoints} from './consts/endpoints';
 
 export const catalogApi = reduxApi({
     search: {
-        url: `${endpoints.catalogs}/v1/companies((:ParentEntityId))/catalog/search`,
+        url: `${endpoints.catalogs}/v1/companies((:ParentEntityId))/catalog/search(:filters)`,
         options: {
             headers: getAjaxHeader({
                 Accept: 'application/json'
             })
+        },
+        helpers: {
+            get(filters = {}) {
+                const {ParentEntityId} = this.getState().accounts.me.data;
+                const urlParams = Object.assign({}, {
+                    OrderDir: 'asc',
+                    OrderBy: 'dateAdded'
+                }, filters);
+                const queryStrings = Object.keys(urlParams).map(key => `${key}=${urlParams[key]}`).join('&');
+                return [{ ParentEntityId, filters: `?${queryStrings}` }];
+            }
         }
     },
     getClassificationTree: {
@@ -19,6 +30,12 @@ export const catalogApi = reduxApi({
             headers: getAjaxHeader({
                 Accept: 'application/json'
             })
+        },
+        helpers: {
+            get() {
+                const {ParentEntityId} = this.getState().accounts.me.data;
+                return [{ ParentEntityId }];
+            }
         }
     }
 }).use('fetch', adapterFetch(fetch));
