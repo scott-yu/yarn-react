@@ -4,6 +4,23 @@ import adapterFetch from "redux-api/lib/adapters/fetch";
 import {getAjaxHeader} from './utils/auth-helpers';
 import {endpoints} from './consts/endpoints';
 
+export const productLibraryApi = reduxApi({
+    product: {
+        url: `${endpoints.productLibrary}/ProductManager/products/(:slug)?companyEntityId=(:ParentEntityId)`,
+        options: {
+            headers: getAjaxHeader({
+                Accept: 'application/json'
+            })
+        },
+        helpers: {
+            get(slug) {
+                const {ParentEntityId} = this.getState().accounts.me.data;
+                return [{ slug,  ParentEntityId }];
+            }
+        }
+    }
+}).use('fetch', adapterFetch(fetch));
+
 export const catalogApi = reduxApi({
     search: {
         url: `${endpoints.catalogs}/v1/companies((:ParentEntityId))/catalog/search(:filters)`,

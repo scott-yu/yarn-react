@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware, combineReducers} from "redux";
 import thunk from "redux-thunk";
 import {Provider } from "react-redux";
-import {catalogApi, acountsApi} from './api';
+import {catalogApi, acountsApi, productLibraryApi} from './api';
 import {authenicate} from './utils/auth-helpers';
 import {App} from './app';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -14,7 +14,8 @@ injectTapEventPlugin();
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers({
     catalog: combineReducers(catalogApi.reducers),
-    accounts: combineReducers(acountsApi.reducers)
+    accounts: combineReducers(acountsApi.reducers),
+    productLibrary: combineReducers(productLibraryApi.reducers)
 });
 const store = createStoreWithMiddleware(reducer);
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import {ListItem} from 'material-ui/List';
+import {Link} from 'react-router';
 
 export let ProductListingItem = React.createClass({
     getDefaultProps() {
@@ -8,9 +9,11 @@ export let ProductListingItem = React.createClass({
         };
     },
     render() {
-        const {Name, Slug} = this.props.data;
+        const {Name, Slug, CatalogItemId} = this.props.data;
         return (
-            <ListItem>{Name}</ListItem>
+            <ListItem>
+                <Link to={`product/${CatalogItemId}/${Slug}`}>{Name}</Link>
+            </ListItem>
         );
     }
 });
