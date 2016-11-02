@@ -17,7 +17,8 @@ export const catalogApi = reduxApi({
                 const {ParentEntityId} = this.getState().accounts.me.data;
                 const urlParams = Object.assign({}, {
                     OrderDir: 'asc',
-                    OrderBy: 'dateAdded'
+                    OrderBy: 'dateAdded',
+                    PageSize: 25
                 }, filters);
                 const queryStrings = Object.keys(urlParams).map(key => `${key}=${urlParams[key]}`).join('&');
                 return [{ ParentEntityId, filters: `?${queryStrings}` }];

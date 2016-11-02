@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {ProductListing} from './product-listing';
 import {ClassificationTree} from './classification-tree';
 import {GridList, GridTile} from 'material-ui/GridList';
+import CircularProgress from 'material-ui/CircularProgress';
 
 function select(state) {
     return { search: state.catalog.search, trees: state.catalog.getClassificationTree };
@@ -28,20 +29,19 @@ export let BrowseContainer = connect(select)(React.createClass({
             dispatch(catalogApi.actions.search.get(args));
         }
     },
-    handleNodeClicked(node) {
-        debugger;
-    },
     render() {
         const productList = this.props.search.data.Items;
         const trees = this.props.trees.data.Trees;
-        
         return(
-            <div style={{display: 'flex', 'justifyContent': 'center'}}>
-                <div style={{width: '300px'}}>
-                    <ClassificationTree nodes={trees} onNodeClicked={this.handleNodeClicked}/>
+            <div style={{display: 'flex'}}>
+                <div style={{width: '400px'}}>
+                    <ClassificationTree nodes={trees}/>
                 </div>
-                <div>
-                    <ProductListing products={productList} />
+                <div style={{flexGrow: '1'}}>
+                    {this.props.search.loading
+                        ? <CircularProgress size={60} thickness={7} />
+                        : <ProductListing products={productList} />
+                    }
                 </div>
             </div>
         );

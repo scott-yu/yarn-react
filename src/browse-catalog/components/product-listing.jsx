@@ -1,5 +1,6 @@
 import React from 'react';
 import {ProductListingItem} from './product-listing-item';
+import {List} from 'material-ui/List';
 
 export let ProductListing = React.createClass({
     getDefaultProps() {
@@ -11,11 +12,11 @@ export let ProductListing = React.createClass({
         const productList = this.props.products;
 
         return(
-            <ul>
+            <List>
             {productList.map((product, index) => 
                 <ProductListingItem key={index} data={product} />
             )}
-            </ul>
+            </List>
         );
     }
 });

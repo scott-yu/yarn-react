@@ -1,4 +1,5 @@
 import React from 'react';
+import {ListItem} from 'material-ui/List';
 
 export let ProductListingItem = React.createClass({
     getDefaultProps() {
@@ -9,7 +10,7 @@ export let ProductListingItem = React.createClass({
     render() {
         const {Name, Slug} = this.props.data;
         return (
-            <li>{Name}</li>
+            <ListItem>{Name}</ListItem>
         );
     }
 });
