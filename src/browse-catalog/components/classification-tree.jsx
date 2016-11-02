@@ -28,7 +28,7 @@ export let ClassificationTree = React.createClass({
             return (<ListItem
                 key={index}
                 initiallyOpen={level < 1}
-                primaryText={<Link to={getClassificationLink(node, level, this.props.treeId)}>{node.Name}</Link>}
+                primaryText={<Link activeStyle={{ fontWeight: 'bold' }} to={getClassificationLink(node, level, this.props.treeId)}>{node.Name}</Link>}
                 nestedItems={children.map((child, index) => createNode(index, child, level + 1))} />
             );
         };
